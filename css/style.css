@@ -39,7 +39,7 @@ button {
     padding-top:70px;
     /* justify-content: center; */
     transition: 0.5s;
-    z-index: 9999999999;
+    z-index: 999;
   }
   #check:checked ~ .profile {
     left: 0;

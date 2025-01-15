@@ -61,7 +61,7 @@ contacts.addEventListener("click", (e) => {
           }
         })
       );
-    console.log(e.target.id);
+    // console.log(e.target.id);
     iTake = e.target.id;
     rigth_side.style.display = "block";
   } else {
