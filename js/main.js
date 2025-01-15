@@ -111,12 +111,12 @@ function checkfunc(data) {
                 class="bg-[#effedd] relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-md rounded-br-none min-w-[70px] "
               >
                 <p class="text-[18px] message_for_green ">
-               ${value.message}
+               ${value?.message}
                 </p>
                 <p
                   class="text-[12px] text-[#62ac55] absolute bottom-1 right-1 flex gap-2 items-center"
                 >
-                  ${value.time} <img src="./assets/svg/ticket.svg" alt="" />
+                  ${value?.time} <img src="./assets/svg/ticket.svg" alt="" />
                 </p>
                 <img
                   class="absolute bottom-0 h-4 right-[-8px]"
@@ -135,12 +135,12 @@ function checkfunc(data) {
                 class="bg-white relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-lg rounded-bl-none"
                 >
                 <p class="text-[18px]">
-                  ${value.message}
+                  ${value?.message}
                 </p>
                 <p
                   class="text-[12px] text-[#a1aab3] absolute bottom-1 right-2 flex gap-2 items-center"
                 >
-                  12:06
+                  ${value?.time}
                 </p>
                 <img
                   class="absolute bottom-0 h-4 left-[-5px]"
