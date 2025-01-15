@@ -25,22 +25,22 @@ button {
   }
 }
 .profile {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: -100%;
-    width: 100%;
-    height: 100vh;
-    gap: 20px;
-    background-color: #517da2;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    padding: 30px;
-    padding-top:70px;
-    /* justify-content: center; */
-    transition: 0.5s;
-    z-index: 999;
-  }
-  #check:checked ~ .profile {
-    left: 0;
-  }
+  width: 100%;
+  height: 100vh;
+  gap: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* padding: 30px;
+    padding-top:70px; */
+  /* justify-content: center; */
+  transition: 0.5s;
+  z-index: 999 !important;
+}
+#check:checked ~ .profile {
+  left: 0;
+}

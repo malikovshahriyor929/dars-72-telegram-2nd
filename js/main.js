@@ -95,7 +95,7 @@ message_form.addEventListener("submit", (e) => {
       }),
     })
       .then((data) => data.json())
-      .then(() => window.location.reload());
+      .then((data) => checkfunc([data]));
   }
   message_input.value = "";
 });
@@ -103,12 +103,7 @@ message_form.addEventListener("submit", (e) => {
 // put messages
 function checkfunc(data) {
   data.forEach((value) => {
-    if (
-      value.userid == userid &&
-      value.resive == clicked_id
-      // ||(value.userid == clicked_id && value.resive == userid)
-    ) {
-      console.log(value);
+    if (value.userid == userid && value.resive == clicked_id) {
       let text = document.createElement("div");
       text.innerHTML = `
       <div  class="flex items-end  flex-col">
@@ -158,56 +153,6 @@ function checkfunc(data) {
 
       messages.append(text);
     }
-    // if (value.name == check && value.userid == userid) {
-    //   let text = document.createElement("div");
-    //   text.innerHTML = `
-    //   <div  class="flex items-end  flex-col">
-    //           <div
-    //             class="bg-[#effedd] relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-md rounded-br-none min-w-[70px] "
-    //           >
-    //             <p class="text-[18px] message_for_green ">
-    //            ${value.message}
-    //             </p>
-    //             <p
-    //               class="text-[12px] text-[#62ac55] absolute bottom-1 right-1 flex gap-2 items-center"
-    //             >
-    //               ${value.time} <img src="./assets/svg/ticket.svg" alt="" />
-    //             </p>
-    //             <img
-    //               class="absolute bottom-0 h-4 right-[-8px]"
-    //               src="./assets/svg/mymess.svg"
-    //               alt=""
-    //             />
-    //           </div>
-    //         </div>
-    // `;
-    //   messages.append(text);
-    // } else {
-    //   let text = document.createElement("div");
-    //   text.innerHTML = `
-    //   <div class="flex flex-col items-start message_for_white">
-    //           <div
-    //             class="bg-white relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-lg rounded-bl-none"
-    //             >
-    //             <p class="text-[18px]">
-    //               ${value.message}
-    //             </p>
-    //             <p
-    //               class="text-[12px] text-[#a1aab3] absolute bottom-1 right-2 flex gap-2 items-center"
-    //             >
-    //               12:06
-    //             </p>
-    //             <img
-    //               class="absolute bottom-0 h-4 left-[-5px]"
-    //               src="./assets/svg/yourmess.svg"
-    //               alt=""
-    //             />
-    //           </div>
-    //         </div>
-    //               `;
-
-    //   messages.append(text);
-    // }
   });
 }
 
@@ -240,12 +185,46 @@ function contactsfunc(data) {
       contacts.append(contact);
     } else if (value.name == check) {
       yourAvatar.src = value.img;
-      phoneNum.innerHTML = value.phone
-      username.innerHTML = value.name
-
+      phoneNum.innerHTML = value.phone;
+      username.innerHTML = value.name;
     }
   });
 }
+
+// let setting = document.querySelector(".setting");
+// setting.addEventListener("click", (e) => {
+//   let inputs_for_profile = document.querySelector(".inputs_for_profile");
+//   inputs_for_profile.style.display = "flex";
+//   let avatarInput = document.querySelector(".avatarInput");
+//   let usernameInput = document.querySelector(".usernameInput");
+//   let phoneNumInput = document.querySelector(".phoneNumInput");
+
+//   // usernameInput.value = username.innerHTML
+//   // phoneNumInput.value = phoneNum.innerHTML
+//   // username = ""
+//   // phoneNum = ""
+//   // yourAvatar = ""
+
+//   // let file = avatarInput.files[0];
+//   // console.log(file);
+//   // let reander = new FileReader();
+//   // reander.onload = function (e) {
+//   //   let imgUrl = e.target.result;
+//   //   // console.log(imgUrl);
+
+//   //   // fetch("https://67828199c51d092c3dcfc05f.mockapi.io/telegram/users_api",{
+//   //   //   method:"PUT",
+//   //   //   headers:{"Content-Type":"application/json"},
+//   //   //   body:JSON.stringify({
+
+//   //   //   })
+//   //   // });
+//   // };
+//   // reander.readAsDataURL(file)
+//   // avatarDiv.append(avatarInput);
+//   // username.append(usernameInput);
+//   // phoneNum.append(phoneNumInput);
+// });
 
 fetchfunc();
 getFetchFunc();
