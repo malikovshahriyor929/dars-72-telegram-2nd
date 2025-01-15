@@ -578,12 +578,12 @@ video {
   bottom: 0.25rem;
 }
 
-.left-\[-5px\] {
-  left: -5px;
+.left-4 {
+  left: 1rem;
 }
 
-.right-0 {
-  right: 0px;
+.left-\[-5px\] {
+  left: -5px;
 }
 
 .right-1 {
@@ -600,6 +600,10 @@ video {
 
 .top-0 {
   top: 0px;
+}
+
+.top-6 {
+  top: 1.5rem;
 }
 
 .z-\[888\] {
@@ -634,6 +638,10 @@ video {
 
 .flex {
   display: flex;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-14 {
@@ -769,16 +777,16 @@ video {
   border-radius: 0.25rem;
 }
 
+.rounded-full {
+  border-radius: 9999px;
+}
+
 .rounded-lg {
   border-radius: 0.5rem;
 }
 
 .rounded-md {
   border-radius: 0.375rem;
-}
-
-.rounded-full {
-  border-radius: 9999px;
 }
 
 .rounded-b-md {
@@ -1013,14 +1021,18 @@ video {
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
 
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(0 107 255 / var(--tw-text-opacity, 1));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.text-primary {
-  --tw-text-opacity: 1;
-  color: rgb(0 107 255 / var(--tw-text-opacity, 1));
+.text-opacity-40 {
+  --tw-text-opacity: 0.4;
 }
 
 .shadow {
@@ -1061,6 +1073,28 @@ button {
     width: 1350px;
     margin: 0 auto;
   }
+}
+
+.profile {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100vh;
+  gap: 20px;
+  background-color: #517da2;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  padding: 30px;
+  padding-top:70px;
+  /* justify-content: center; */
+  transition: 0.5s;
+  z-index: 9999999999;
+}
+
+#check:checked ~ .profile {
+  left: 0;
 }
 
 .hover\:underline:hover {

@@ -5,53 +5,79 @@ if (!localStorage.getItem("access")) {
 let BASE_URL = "https://67828199c51d092c3dcfc05f.mockapi.io/telegram/message";
 let contacts = document.querySelector(".contacts");
 let messages = document.querySelector(".messages");
-// login 
+// login
 let name = document.querySelector(".name");
-name.textContent = JSON.parse(localStorage.getItem("name"));
 let check = JSON.parse(localStorage.getItem("name"));
 let userid = JSON.parse(localStorage.getItem("userid"));
+let clicked_id = JSON.parse(localStorage.getItem("clicked_id")) || 0;
+let yourAvatar = document.querySelector(".yourAvatar");
+let phoneNum = document.querySelector(".phoneNum");
+let username = document.querySelector(".username");
 //nothing
-let resive = "";
+// let resive = "";
 //input things
 let message_form = document.querySelector(".message_form");
-let online =document.querySelector(".online")
+let online = document.querySelector(".online");
 let message_input = document.querySelector(".message_input");
 
 // time
 let date = new Date();
-let hour = date.getHours() <= 10 ? "0" + date.getHours() : date.getHours();
+let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
 let minute =
-date.getMinutes() <= 10 ? "0" + date.getMinutes():date.getMinutes();
+  date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
 // log
 let logout = document.querySelector(".logout");
 // avatar
-let avatar = document.querySelector("#avatar")
+let avatar = document.querySelector("#avatar");
+// right_side
+let rigth_side = document.querySelector(".rigth_side");
+rigth_side.style.display = "none";
+let iTake = "";
 
 // logout
 logout.addEventListener("click", () => {
   localStorage.clear();
   window.location.href = "./login.html";
 });
-
-// nothing
- contacts.addEventListener("click", (e) => {
-  // if (e.target.classList.contains("con")) {
-  //   resive = e.target.id;
-  // }
- });
-
-
-// typing 
-message_input.addEventListener("keyup",(e)=>{
-  e.preventDefault()
-  if(message_input.value.length > 4){
-    online.innerHTML = "typing..."
-  }else{
-
-    online.innerHTML = "online"
+// get message
+function fetchfunc() {
+  fetch(BASE_URL)
+    .then((data) => data.json())
+    .then((data) => {
+      checkfunc(data);
+    });
+}
+// chats
+contacts.addEventListener("click", (e) => {
+  localStorage.setItem("clicked_id", JSON.stringify(e.target.id));
+  if (e.target.classList.contains("con") && clicked_id == e.target.id) {
+    fetch("https://67828199c51d092c3dcfc05f.mockapi.io/telegram/users_api")
+      .then((data) => data.json())
+      .then((data) =>
+        data.forEach((value) => {
+          if (value.id == clicked_id) {
+            avatar.src = value.img;
+            name.innerHTML = value.name;
+          }
+        })
+      );
+    console.log(e.target.id);
+    iTake = e.target.id;
+    rigth_side.style.display = "block";
+  } else {
+    window.location.reload();
   }
-  
-})
+});
+
+// typing
+message_input.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  if (message_input.value.length > 4) {
+    online.innerHTML = "typing...";
+  } else {
+    online.innerHTML = "online";
+  }
+});
 
 //   message_form
 message_form.addEventListener("submit", (e) => {
@@ -65,7 +91,7 @@ message_form.addEventListener("submit", (e) => {
         time: hour + ":" + minute,
         userid: JSON.parse(localStorage.getItem("userid")),
         name: JSON.parse(localStorage.getItem("name")),
-        resive: resive,
+        resive: JSON.parse(localStorage.getItem("clicked_id")),
       }),
     })
       .then((data) => data.json())
@@ -74,19 +100,15 @@ message_form.addEventListener("submit", (e) => {
   message_input.value = "";
 });
 
-// get message
-function fetchfunc() {
-  fetch(BASE_URL)
-    .then((data) => data.json())
-    .then((data) => {
-      checkfunc(data);
-    });
-}
-
 // put messages
 function checkfunc(data) {
   data.forEach((value) => {
-    if (value.name == check && value.userid == userid) {
+    if (
+      value.userid == userid &&
+      value.resive == clicked_id
+      // ||(value.userid == clicked_id && value.resive == userid)
+    ) {
+      console.log(value);
       let text = document.createElement("div");
       text.innerHTML = `
       <div  class="flex items-end  flex-col">
@@ -110,9 +132,9 @@ function checkfunc(data) {
             </div>
     `;
       messages.append(text);
-    } else {
+    } else if (value.userid == clicked_id && value.resive == userid) {
       let text = document.createElement("div");
-      text.innerHTML = ` 
+      text.innerHTML = `
       <div class="flex flex-col items-start message_for_white">
               <div
                 class="bg-white relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-lg rounded-bl-none"
@@ -136,8 +158,59 @@ function checkfunc(data) {
 
       messages.append(text);
     }
+    // if (value.name == check && value.userid == userid) {
+    //   let text = document.createElement("div");
+    //   text.innerHTML = `
+    //   <div  class="flex items-end  flex-col">
+    //           <div
+    //             class="bg-[#effedd] relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-md rounded-br-none min-w-[70px] "
+    //           >
+    //             <p class="text-[18px] message_for_green ">
+    //            ${value.message}
+    //             </p>
+    //             <p
+    //               class="text-[12px] text-[#62ac55] absolute bottom-1 right-1 flex gap-2 items-center"
+    //             >
+    //               ${value.time} <img src="./assets/svg/ticket.svg" alt="" />
+    //             </p>
+    //             <img
+    //               class="absolute bottom-0 h-4 right-[-8px]"
+    //               src="./assets/svg/mymess.svg"
+    //               alt=""
+    //             />
+    //           </div>
+    //         </div>
+    // `;
+    //   messages.append(text);
+    // } else {
+    //   let text = document.createElement("div");
+    //   text.innerHTML = `
+    //   <div class="flex flex-col items-start message_for_white">
+    //           <div
+    //             class="bg-white relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-lg rounded-bl-none"
+    //             >
+    //             <p class="text-[18px]">
+    //               ${value.message}
+    //             </p>
+    //             <p
+    //               class="text-[12px] text-[#a1aab3] absolute bottom-1 right-2 flex gap-2 items-center"
+    //             >
+    //               12:06
+    //             </p>
+    //             <img
+    //               class="absolute bottom-0 h-4 left-[-5px]"
+    //               src="./assets/svg/yourmess.svg"
+    //               alt=""
+    //             />
+    //           </div>
+    //         </div>
+    //               `;
+
+    //   messages.append(text);
+    // }
   });
 }
+
 // get data for side bar or chats
 function getFetchFunc() {
   fetch("https://67828199c51d092c3dcfc05f.mockapi.io/telegram/users_api")
@@ -145,11 +218,10 @@ function getFetchFunc() {
     .then((data) => contactsfunc(data));
 }
 
-// function for chats
+// function for left bar chats
 function contactsfunc(data) {
   data.forEach((value) => {
     if (value.name !== check) {
-      // console.log(value.message);
       let contact = document.createElement("div");
       contact.classList.add(value.id);
       contact.innerHTML = `
@@ -166,11 +238,13 @@ function contactsfunc(data) {
         </div>            
             `;
       contacts.append(contact);
-      avatar.src = value.img
+    } else if (value.name == check) {
+      yourAvatar.src = value.img;
+      phoneNum.innerHTML = value.phone
+      username.innerHTML = value.name
+
     }
-    // console.log(value.img);
   });
-  // console.log(data);
 }
 
 fetchfunc();

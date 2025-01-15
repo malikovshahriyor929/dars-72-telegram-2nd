@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Telegram web</title>
-    <link rel="icon" href="./assets/svg/telegram.svg">
+    <link rel="icon" href="./assets/svg/telegram.svg" />
     <link rel="stylesheet" href="./css/output.css" />
   </head>
   <body>
@@ -26,64 +26,75 @@
             <p class="text-[20px] text-white font-semibold">All chats</p>
             <div class="w-16 rounded-t-md bg-white h-2 mx-2.5"></div>
           </div>
+          <input class="hidden" id="check" type="checkbox">
+          <div class="profile flex flex-col gap-5">
+            <label class="absolute top-6 left-4" for="check">
+              <img src="./assets/svg/backtopage.svg" alt="">
+            </label>
+            <div class="flex items-center gap-4">
+              <img
+                class="h-14 w-14 rounded-full yourAvatar"
+                src=""
+                alt="salon "
+              />
+              <div class="flex flex-col justify-between text-white">
+                <p class="text-[18px] username font-medium">username</p>
+                <p class="text-opacity-40">online</p>
+              </div>
+            </div>
+            <a class="text-[15px] font-medium text-white  phoneNum" href="asfd">phone</a>
+          </div>
         </div>
         <!-- channel -->
         <div class="">
-          <div class="flex gap-3 p-3 border-b">
-            <img src="./assets/svg/telegram.svg" alt="" />
-            <div class="flex flex-col justify-between">
-              <p class="flex items-center gap-3 font-medium text-[#222]">
-                Telegram Support
-                <img src="./assets/svg/worth_thing_in_telegram.svg" alt="" />
-              </p>
-              <p  class="text-[15px] text-[#8d8e90]">
-                Yes it happened.
-              </p>
-            </div>
-          </div>
-      <div class="contacts">
-      
-      </div>
+          <div class="contacts"></div>
         </div>
       </div>
-      <div class="basis-[70%]  right-0 flex flex-col">
-        <!-- text header  -->
-        <div
-          class="bg-[#517da2] sticky top-0 h-[90px] flex justify-between items-center px-4 z-[888]"
-        >
-          <div class="flex items-center gap-3">
-            <img id="avatar" class="h-14 w-14 rounded-full" src="./assets/svg/elon.svg" alt="" />
-            <div>
-              <p class="name font-medium text-[20px] text-white">Elon</p>
-              <p class="text-[#d2e9fb] online">online</p>
-            </div>
-          </div>
-          <div class="flex gap-2 items-center">
-            <img class="pt-1" src="./assets/svg/search.svg" alt="" />
-            <img src="./assets/svg/Dots Icon.svg" alt="" />
-          </div>
-        </div>
-        <!-- text messages  -->
-        <div class="bg-[url('/assets/svg/Background.svg')] pb-20 h-full">
-          <div class="messages"></div>
-        </div>
-        <!-- text write input  -->
-        <div
-          class="fixed bottom-0 bg-white py-2 flex items-center w-[70%] justify-between px-4"
-        >
-          <div class="flex items-center gap-5 w-full">
-            <img class="h-[33px]" src="./assets/svg/Attach Icon.svg" alt="" />
-            <form class="message_form flex items-center gap-3 w-full">
-              <input
-                class="message_input p-1.5 text-[20px] bg-transparen w-full outline-none"
-                type="text"
-                placeholder="Write a message..."
+      <div class="basis-[70%] bg-[url('/assets/svg/Background.svg')]">
+        <div class="flex flex-col rigth_side">
+          <!-- text header  -->
+          <div
+            class="bg-[#517da2] sticky top-0 h-[90px] flex justify-between items-center px-4 z-[888]"
+          >
+            <div class="flex items-center gap-3">
+              <img
+                id="avatar"
+                class="h-14 w-14 rounded-full"
+                src="./assets/svg/elon.svg"
+                alt=""
               />
-            </form>
+              <div>
+                <p class="name font-medium text-[20px] text-white">Elon</p>
+                <p class="text-[#d2e9fb] online">online</p>
+              </div>
+            </div>
+            <div class="flex gap-2 items-center">
+              <img class="pt-1" src="./assets/svg/search.svg" alt="" />
+              <img src="./assets/svg/Dots Icon.svg" alt="" />
+            </div>
           </div>
-          <div class="flex items-center gap-4">
-            <img class="h-[33px]" src="./assets/svg/Emoji Icon.svg" alt="" />
-            <img class="h-[33px]" src="./assets/svg/Voice Icon.svg" alt="" />
+          <!-- text messages  -->
+          <div class="bg-[url('/assets/svg/Background.svg')] pb-20 h-full">
+            <div class="messages"></div>
+          </div>
+          <!-- text write input  -->
+          <div
+            class="fixed bottom-0 bg-white py-2 flex items-center w-[70%] justify-between px-4"
+          >
+            <div class="flex items-center gap-5 w-full">
+              <img class="h-[33px]" src="./assets/svg/Attach Icon.svg" alt="" />
+              <form class="message_form flex items-center gap-3 w-full">
+                <input
+                  class="message_input p-1.5 text-[20px] bg-transparen w-full outline-none"
+                  type="text"
+                  placeholder="Write a message..."
+                />
+              </form>
+            </div>
+            <div class="flex items-center gap-4">
+              <img class="h-[33px]" src="./assets/svg/Emoji Icon.svg" alt="" />
+              <img class="h-[33px]" src="./assets/svg/Voice Icon.svg" alt="" />
+            </div>
           </div>
         </div>
       </div>
