@@ -1,5 +1,5 @@
 if (!localStorage.getItem("access")) {
-  localStorage.removeItem("access");
+  localStorage.clear();
   window.location.href = "./login.html";
 }
 let BASE_URL = "https://67828199c51d092c3dcfc05f.mockapi.io/telegram/message";
