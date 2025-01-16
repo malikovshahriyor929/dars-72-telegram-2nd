@@ -13,12 +13,13 @@ let clicked_id = JSON.parse(localStorage.getItem("clicked_id")) || 0;
 let yourAvatar = document.querySelector(".yourAvatar");
 let phoneNum = document.querySelector(".phoneNum");
 let username = document.querySelector(".username");
-//nothing
-// let resive = "";
+let back = document.querySelector(".back");
 //input things
 let message_form = document.querySelector(".message_form");
 let online = document.querySelector(".online");
 let message_input = document.querySelector(".message_input");
+let setting = document.querySelector(".setting");
+let inputs_for_profile = document.querySelector(".inputs_for_profile");
 
 // time
 let date = new Date();
@@ -32,7 +33,7 @@ let avatar = document.querySelector("#avatar");
 // right_side
 let rigth_side = document.querySelector(".rigth_side");
 rigth_side.style.display = "none";
-let iTake = "";
+// let deleteclass = document.querySelector(".deleteclass");
 
 // logout
 logout.addEventListener("click", () => {
@@ -61,8 +62,6 @@ contacts.addEventListener("click", (e) => {
           }
         })
       );
-    // console.log(e.target.id);
-    iTake = e.target.id;
     rigth_side.style.display = "block";
   } else {
     window.location.reload();
@@ -105,12 +104,13 @@ function checkfunc(data) {
   data.forEach((value) => {
     if (value.userid == userid && value.resive == clicked_id) {
       let text = document.createElement("div");
+      text.classList.add("deleteclass");
       text.innerHTML = `
       <div  class="flex items-end  flex-col">
               <div
                 class="bg-[#effedd] relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-md rounded-br-none min-w-[70px] "
               >
-                <p class="text-[18px] message_for_green ">
+                <p id=${value.id} class="text-[18px] message_for_green ">
                ${value?.message}
                 </p>
                 <p
@@ -129,12 +129,13 @@ function checkfunc(data) {
       messages.append(text);
     } else if (value.userid == clicked_id && value.resive == userid) {
       let text = document.createElement("div");
+      text.classList.add("deleteclass");
       text.innerHTML = `
-      <div class="flex flex-col items-start message_for_white">
+      <div class="flex flex-col  items-start message_for_white">
               <div
                 class="bg-white relative flex flex-col items-end w-fit p-[9px_15px_0_15px] pb-5 m-3 rounded-lg rounded-bl-none"
                 >
-                <p class="text-[18px]">
+                <p id=${value.id} class="text-[18px] message_for_green">
                   ${value?.message}
                 </p>
                 <p
@@ -166,65 +167,84 @@ function getFetchFunc() {
 // function for left bar chats
 function contactsfunc(data) {
   data.forEach((value) => {
-    if (value.name !== check) {
+    if (value.id !== userid) {
       let contact = document.createElement("div");
-      contact.classList.add(value.id);
+      contact.classList.add("con");     
       contact.innerHTML = `
               <div id=${value.id} class="con select-none flex gap-3 p-3 border-b ">
-          <img class=" h-14 w-14 rounded-full " src="${value.img}" alt="" />
-            <div class="flex flex-col justify-between">
-              <p class="flex items-center gap-3 font-medium  text-[#222]">${value.name}
-                <img src="./assets/svg/worth_thing_in_telegram.svg" alt="" />
+          <img class=" h-14 w-14 rounded-full con " src="${value.img}" alt="" />
+            <div class="flex con flex-col justify-between">
+              <p class="flex items-center con gap-3 font-medium  text-[#222]">${value.name}
+                <img class="con" src="./assets/svg/worth_thing_in_telegram.svg" alt="" />
               </p>
-              <p  class="text-[15px] messagep text-[#8d8e90]">
+              <p  class="text-[15px] con text-[#8d8e90]">
               Sended message
               </p>
             </div>
         </div>            
             `;
       contacts.append(contact);
-    } else if (value.name == check) {
+    } else if (value.id == userid) {
       yourAvatar.src = value.img;
       phoneNum.innerHTML = value.phone;
       username.innerHTML = value.name;
     }
   });
 }
+// that three listener for profile changing
+setting.addEventListener("click", (e) => {
+  inputs_for_profile.style.display = "flex";
+  usernameInput.value = username.innerHTML.trim();
+  phoneNumInput.value = phoneNum.innerHTML.trim();
+});
+inputs_for_profile.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let avatarInput = document.querySelector("#avatarInput");
+  let usernameInput = document.querySelector("#usernameInput");
+  let phoneNumInput = document.querySelector("#phoneNumInput");
+  let passwordInput = document.querySelector("#passwordInput");
+  let file = avatarInput.files[0];
+  // console.log(avatarInput.files[0]);
+  let reander = new FileReader();
+  reander.onload = function (e) {
+    let imgUrl = e.target.result;
 
-// let setting = document.querySelector(".setting");
-// setting.addEventListener("click", (e) => {
-//   let inputs_for_profile = document.querySelector(".inputs_for_profile");
-//   inputs_for_profile.style.display = "flex";
-//   let avatarInput = document.querySelector(".avatarInput");
-//   let usernameInput = document.querySelector(".usernameInput");
-//   let phoneNumInput = document.querySelector(".phoneNumInput");
+    fetch(
+      `https://67828199c51d092c3dcfc05f.mockapi.io/telegram/users_api/${userid}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          img: imgUrl,
+          name: usernameInput.value.trim(),
+          phone: phoneNumInput.value.trim(),
+          password: passwordInput.value.trim(),
+        }),
+      }
+    )
+      .then((data) => data.json())
+      .then(
+        (data) => contactsfunc([data]),
+        alert("malumot muvoffaqqiyatli almashdi")
+      );
+  };
+  reander.readAsDataURL(file);
+});
+back.addEventListener("click", () => {
+  inputs_for_profile.style.display = "none";
+});
 
-//   // usernameInput.value = username.innerHTML
-//   // phoneNumInput.value = phoneNum.innerHTML
-//   // username = ""
-//   // phoneNum = ""
-//   // yourAvatar = ""
-
-//   // let file = avatarInput.files[0];
-//   // console.log(file);
-//   // let reander = new FileReader();
-//   // reander.onload = function (e) {
-//   //   let imgUrl = e.target.result;
-//   //   // console.log(imgUrl);
-
-//   //   // fetch("https://67828199c51d092c3dcfc05f.mockapi.io/telegram/users_api",{
-//   //   //   method:"PUT",
-//   //   //   headers:{"Content-Type":"application/json"},
-//   //   //   body:JSON.stringify({
-
-//   //   //   })
-//   //   // });
-//   // };
-//   // reander.readAsDataURL(file)
-//   // avatarDiv.append(avatarInput);
-//   // username.append(usernameInput);
-//   // phoneNum.append(phoneNumInput);
-// });
+//delete function delete from api
+messages.addEventListener("dblclick", (e) => {
+  if (e.target.classList.contains("message_for_green")) {
+    fetch(`${BASE_URL}/${e.target.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((data) => data.json())
+      .then(() => window.location.reload());
+  }
+});
 
 fetchfunc();
 getFetchFunc();

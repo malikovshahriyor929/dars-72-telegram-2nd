@@ -43,11 +43,11 @@
               <img
                 id="avatar"
                 class="h-14 w-14 rounded-full"
-                src="./assets/svg/elon.svg"
+                src="./assets/img/defualtavatar.png"
                 alt=""
               />
               <div>
-                <p class="name font-medium text-[20px] text-white">Elon</p>
+                <p class="name font-medium text-[20px] text-white">loading...</p>
                 <p class="text-[#d2e9fb] online">online</p>
               </div>
             </div>
@@ -84,68 +84,99 @@
 
       <!-- checkbox -->
       <input class="hidden" id="check" type="checkbox" />
-      <div class="profile flex flex-col gap-5">
-        <label class="absolute top-6 left-4" for="check">
-          <img src="./assets/svg/backtopage.svg" alt="" />
-        </label>
-        <div class="flex justify-between items-center p-10 py-20 bg-primary2">
-          <div class="flex flex-col gap-4">
-            <div class="flex items-center avatarDiv gap-5">
-              <img
-                class="h-24 w-h-24 rounded-full yourAvatar"
-                src=""
-                alt="salon"
-              />
-              <div class="flex flex-col gap-1">
-                <p class="text-[26px] text-white username font-medium">
-                  username
-                </p>
-                <a
-                  class="text-[20px] font-medium text-white phoneNum"
-                  href="asfd"
-                  >phone</a
-                >
+      <div class="profile">
+        <div class="flex flex-col gap-5 relative">
+          <label class="absolute top-6 left-4" for="check">
+            <img src="./assets/svg/backtopage.svg" alt="" />
+          </label>
+          <div class="flex justify-between items-center bg-primary2">
+            <div class="flex flex-col gap-4">
+              <div class="flex items-center avatarDiv gap-5 p-10 py-20">
+                <img
+                  class="h-24 w-h-24 rounded-full yourAvatar"
+                  src=""
+                  alt="salon"
+                />
+                <div class="flex flex-col gap-1">
+                  <p class="text-[26px] text-white username font-medium">
+                    username
+                  </p>
+                  <a
+                    class="text-[20px] font-medium text-white phoneNum"
+                    href="asfd"
+                    >phone</a
+                  >
+                </div>
               </div>
+              <form
+                class="inputs_for_profile hidden flex-col gap-2 fixed backdrop-blur-[10px] h-full w-full items-center justify-center"
+              >
+                <div
+                  class="m-auto bg-slate-400 flex flex-col gap-2 p-10 rounded-xl relative"
+                >
+                  <img
+                    class="rounded-full h-32 mx-auto"
+                    src="./assets/img/defualtavatar.png"
+                    alt=""
+                  />
+                  <label for="avatarInput" class="flex items-center flex-col">
+                    <i
+                      title="Add your new profile image"
+                      class="fa-solid fa-camera absolute top-[140px] right-[85px] text-[28px] text-white"
+                    ></i>
+                  </label>
+                  <input class="hidden" id="avatarInput" type="file" />
+                  <p class="text-[18px] font-semibold text-white">
+                    Enter your name
+                  </p>
+                  <input
+                    class="bg-transparent border-2 border-white rounded-md p-2 placeholder-white"
+                    id="usernameInput"
+                    type="text"
+                    placeholder="Name"
+                  />
+                  <p class="text-[18px] font-semibold text-white">
+                    Enter your new phone
+                  </p>
+                  <input
+                    class="bg-transparent placeholder-white border-2 border-white rounded-md p-2"
+                    id="phoneNumInput"
+                    type="text"
+                    placeholder="+998"
+                  />
+                  <p class="text-[18px] font-semibold text-white">
+                    Enter your new password
+                  </p>
+                  <input
+                    class="bg-transparent placeholder-white border-2 border-white rounded-md p-2"
+                    id="passwordInput"
+                    type="text"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="submit"
+                    class="text-white font-medium bg-primary2 rounded-lg px-5 py-2"
+                  >
+                    submit
+                  </button>
+                  <label class="absolute top-6 left-4 back">
+                    <img src="./assets/svg/backtopage.svg" alt="" />
+                  </label>
+                </div>
+              </form>
             </div>
-            <div
-              class="inputs_for_profile hidden flex-col items-center gap-1  absolute top-[30%] left-[30%] mx-auto bg-slate-400 p-10 rounded-xl"
-            >
-              <img
-                class="rounded-full h-32"
-                src="./assets/img/defualtavatar.png"
-                alt=""
-              />
-              <label for="avatarInput" class="flex items-center flex-col">
-                <i
-                  class="fa-solid fa-camera absolute top-[140px] right-[100px] text-[28px]"
-                ></i>
-              </label>
-              <input class="hidden" id="avatarInput" type="file" />
-              <p class="text-[18px] font-semibold">Enter your name</p>
-              <input
-                class="bg-transparent placeholder-black border-2 border-black rounded-md p-2"
-                id="usernameInput"
-                type="text"
-                placeholder="Name"
-              />
-              <p class="text-[18px] font-semibold">Enter your new phone</p>
-              <input
-                class="bg-transparent placeholder-black border-2 border-black rounded-md p-2"
-                id="phoneNumInput"
-                type="text"
-                placeholder="+998"
-              />
+            <div class="p-10">
+              <button
+                class="logout border-2 flex items-center text-primary2 justify-center p-4 rounded-xl bg-white text-[20px] font-semibold pr-5"
+              >
+                Log out
+              </button>
             </div>
           </div>
-          <button
-            class="logout border-2 flex items-center text-primary2 justify-center p-4 rounded-xl bg-white text-[20px] font-semibold pr-5"
-          >
-            Log out
-          </button>
-        </div>
-        <div id="setting" class="bg-white p-10 flex gap-2 setting">
-          <img class="" src="./assets/img/Settings Icon.png" alt="" />
-          <p class="text-[#444] font-medium text-[20px]">Settings</p>
+          <div id="setting" class="bg-white p-10 flex gap-2 setting">
+            <img class="" src="./assets/img/Settings Icon.png" alt="" />
+            <p class="text-[#444] font-medium text-[20px]">Settings</p>
+          </div>
         </div>
       </div>
     </main>
