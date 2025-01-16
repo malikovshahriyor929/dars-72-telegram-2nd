@@ -169,7 +169,7 @@ function contactsfunc(data) {
   data.forEach((value) => {
     if (value.id !== userid) {
       let contact = document.createElement("div");
-      contact.classList.add("con");     
+      contact.classList.add("con");
       contact.innerHTML = `
               <div id=${value.id} class="con select-none flex gap-3 p-3 border-b ">
           <img class=" h-14 w-14 rounded-full con " src="${value.img}" alt="" />
@@ -204,7 +204,6 @@ inputs_for_profile.addEventListener("submit", (e) => {
   let phoneNumInput = document.querySelector("#phoneNumInput");
   let passwordInput = document.querySelector("#passwordInput");
   let file = avatarInput.files[0];
-  // console.log(avatarInput.files[0]);
   let reander = new FileReader();
   reander.onload = function (e) {
     let imgUrl = e.target.result;
@@ -237,12 +236,14 @@ back.addEventListener("click", () => {
 //delete function delete from api
 messages.addEventListener("dblclick", (e) => {
   if (e.target.classList.contains("message_for_green")) {
-    fetch(`${BASE_URL}/${e.target.id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((data) => data.json())
-      .then(() => window.location.reload());
+    if (confirm("siz shu messageni ochirmoq chimisiz")) {
+      fetch(`${BASE_URL}/${e.target.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((data) => data.json())
+        .then(() => window.location.reload());
+    }
   }
 });
 
